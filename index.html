@@ -28,6 +28,41 @@
     <li><a href="/pages/favorites.html">Favorites</a></li>
     <li><a href="/pages/about.html">About</a></li>
   </ul>
+
+  <div class="container">
+    <ul class="contacts collection with-header">
+      <li class="collection-header">
+        <h4>Contacts</h4>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="add_contact_modal" class="modal add-contact">
+    <div class="modal-content">
+      <h4>New Contact</h4>
+      <form action="">
+        <input type="text" name="name" placeholder="Person name">
+        <input type="text" name="phone" placeholder="Phone number">
+        <button class="btn">Add</button>
+        <p class="error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="edit_contact_modal " class="modal edit-contact">
+    <div class="modal-content">
+      <h4>Edit Contact</h4>
+      <form action="">
+        <input type="text" name="name" placeholder="Person name">
+        <input type="text" name="phone" placeholder="Phone number">
+        <button class="btn">Update</button>
+        <p class="error"></p>
+      </form>
+    </div>
+  </div>
+
   <script src="/js/ui.js"></script>
 </body>
 </html>
