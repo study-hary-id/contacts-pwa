@@ -7,8 +7,19 @@ const assets = [
   '/js/ui.js',
   '/js/materialize.min.js',
   '/css/materialize.min.css',
-  'https://fonts.googleapis.com/icon?family=Material+Icons'
+  'https://fonts.googleapis.com/icon?family=Material+Icons',
+  '/pages/fallback.html'
 ];
+
+const limitNumCache = (cacheName, num) => {
+  caches.open(cacheName).then(cache => {
+    cache.keys().then(keys => {
+      if (keys.length > num) {
+        cache.delete(keys[0]).then(limitNumCache(cacheName, num));
+      }
+    });
+  });
+};
 
 self.addEventListener('install', e => {
   console.log('serviceWorker has installed.');
@@ -34,9 +45,10 @@ self.addEventListener('fetch', e => {
       return staticRes || fetch(e.request).then(dynamicRes => {
         return caches.open(dynamicCache).then(cache => {
           cache.put(e.request.url, dynamicRes.clone());
+          limitNumCache(dynamicCache, 2);
           return dynamicRes;
         });
       });
-    })
+    }).catch(() => caches.match('/pages/fallback.html'))
   );
 });
