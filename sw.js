@@ -35,20 +35,22 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    // When fetch events, yep this is a loop.
-    // If the request match with the caches,
-    // Give the data from caches if available,
-    // Otherwise fetch from the server and cache
-    // the new data/response and give the new res.
-    caches.match(e.request).then(staticRes => {
-      return staticRes || fetch(e.request).then(dynamicRes => {
-        return caches.open(dynamicCache).then(cache => {
-          cache.put(e.request.url, dynamicRes.clone());
-          limitNumCache(dynamicCache, 2);
-          return dynamicRes;
+  if (e.request.url.indexOf('firestore.googleapis.com') === -1) {
+    e.respondWith(
+      // When fetch events, yep this is a loop.
+      // If the request match with the caches,
+      // Give the data from caches if available,
+      // Otherwise fetch from the server and cache
+      // the new data/response and give the new res.
+      caches.match(e.request).then(staticRes => {
+        return staticRes || fetch(e.request).then(dynamicRes => {
+          return caches.open(dynamicCache).then(cache => {
+            cache.put(e.request.url, dynamicRes.clone());
+            limitNumCache(dynamicCache, 2);
+            return dynamicRes;
+          });
         });
-      });
-    }).catch(() => caches.match('/pages/fallback.html'))
-  );
+      }).catch(() => caches.match('/pages/fallback.html'))
+    );
+  }
 });
