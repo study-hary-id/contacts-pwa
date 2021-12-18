@@ -14,6 +14,18 @@
 
   <script src="/js/materialize.min.js"></script>
   <title>ContactsPWA</title>
+  <style>
+    .collection .collection-item.avatar i.circle {
+      font-size: 24px;
+    }
+    .collection.with-header .collection-item.avatar {
+      padding-top: 20px;
+    }
+    .collection .collection-item.avatar .secondary-content {
+      top: 1px;
+      right: 1px;
+    }
+  </style>
 </head>
 <body>
   <nav class="nav-extended">
@@ -55,7 +67,7 @@
   </div>
 
   <!-- Modal Structure -->
-  <div id="edit_contact_modal " class="modal edit-contact">
+  <div id="edit_contact_modal" class="modal edit-contact">
     <div class="modal-content">
       <h4>Edit Contact</h4>
       <form action="">
