@@ -13,8 +13,14 @@ contactForm.addEventListener('submit', e => {
     contactForm.reset();
     instance.close();
     contactForm.querySelector('.error').textContent = '';
-    console.log("Successfully add contact.", contact);
   }).catch(err => {
     contactForm.querySelector('.error').textContent = err.message;
+  });
+});
+
+db.collection('contacts').onSnapshot(snapshot => {
+  snapshot.docChanges().forEach(change => {
+    renderContacts(change.doc.data(), change.doc.id);
+    console.log(`${change.doc.id} has ${change.type}.`, change.doc.data());
   });
 });
