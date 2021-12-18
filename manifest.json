@@ -43,5 +43,6 @@
   "background_color": "#ee6f72",
   "display": "standalone",
   "theme_color": "#9e2123",
-  "description": "Progressive Web Application to manage contacts on any devices"
+  "description": "Progressive Web Application to manage contacts on any devices",
+  "orientation": "portrait-primary"
 }
