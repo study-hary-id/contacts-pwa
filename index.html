@@ -68,12 +68,32 @@
   </div>
 
   <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
+    <a class="btn-floating btn-large red modal-trigger" href="#add_contact_modal">
       <i class="large material-icons">mode_edit</i>
     </a>
   </div>
 
+  <!-- TODO: Add SDKs for Firebase products that you want to use -->
+  <!-- https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB3S90XZ-F4TzuIrv6qb06JTonkxcf976Q",
+      authDomain: "contactspwa-a4b5f.firebaseapp.com",
+      // databaseURL: "https://contactspwa-a4b5f.firebaseio.com",
+      projectId: "contactspwa-a4b5f",
+      storageBucket: "contactspwa-a4b5f.appspot.com",
+      messagingSenderId: "61338850443",
+      appId: "1:61338850443:web:b47e585becf288afa9b08e"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
   <script src="/js/app.js"></script>
+  <script src="/js/db.js"></script>
   <script src="/js/ui.js"></script>
 </body>
 </html>
