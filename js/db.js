@@ -50,10 +50,9 @@ db.collection('contacts').onSnapshot(snapshot => {
       renderContacts(change.doc.data(), change.doc.id);
     } else if (change.type === 'removed') {
       removeContact(change.doc.id);
+    } else if (change.type === 'modified') {
+      updateContact(change.doc.data(), change.doc.id);
     }
-    // else if (change.type === 'modified') {
-//       rerenderContact(change.doc.data(), change.doc.id);
-//     }
     console.log(`${change.doc.id} has ${change.type}.`, change.doc.data());
   });
 });
@@ -63,6 +62,7 @@ contactContainer.addEventListener('click', e => {
   if (e.target.textContent === 'delete_outline') {
     const id = e.target.parentElement.getAttribute('data-id');
     db.collection('contacts').doc(id).delete();
+
   } else if (e.target.textContent === 'edit') {
     // Store the data that wants to edit to the form.
     updateId = e.target.parentElement.getAttribute('data-id');
@@ -71,5 +71,15 @@ contactContainer.addEventListener('click', e => {
     const phone = contact.querySelector('.phone').innerHTML;
     editForm.name.value = name;
     editForm.phone.value = phone;
+
+  } else if (e.target.textContent === 'star_border') {
+    const id = e.target.parentElement.getAttribute('data-id');
+    contact = { favorite: true };
+    db.collection('contacts').doc(id).update(contact);
+
+  } else if (e.target.textContent === 'star') {
+    const id = e.target.parentElement.getAttribute('data-id');
+    contact = { favorite: false };
+    db.collection('contacts').doc(id).update(contact);
   }
 });
